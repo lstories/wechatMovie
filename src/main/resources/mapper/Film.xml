@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 建立xml文件 -->
+<mapper namespace="com.wechatmovie.mapper.FilmMapper">
+
+    <!--  模糊查询  -->
+    <select id="listByCondition" resultType="com.wechatmovie.entity.Film">
+        select * from film
+            <where>
+                <if test="filmName != null and filmName != ''">
+                    filmName like concat('%', #{filmName}, '%')
+                </if>
+            </where>
+        order by id desc
+    </select>
+
+    <!--  新增  -->
+    <insert id="add">
+        insert into film(id, filmName, category, createTime, profiles, actor, director, pic, price)
+        value (#{id}, #{filmName}, #{category}, #{createTime}, #{profiles}, #{actor}, #{director}, #{pic}, #{price})
+    </insert>
+    <!--  查询列表  -->
+    <select id="list" resultType="com.wechatmovie.entity.Film">
+        select * from film order by id desc
+    </select>
+
+    <!--  通过id来查询  -->
+    <select id="getById" resultType="com.wechatmovie.entity.Film">
+        select * from film where id = #{id}
+    </select>
+    <!--  通过id将修改后的数据, 更新到数据库  -->
+    <update id="updateById">
+        update film set filmName = #{filmName}, category = #{category}, createTime = #{createTime}, profiles = #{profiles},
+                        actor = #{actor}, director = #{director}, pic = #{pic}, price = #{price}
+        where id = #{id}
+    </update>
+    <!--   通过Id删除用户  -->
+    <delete id="deleteById">
+        delete from film where id = #{id}
+    </delete>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

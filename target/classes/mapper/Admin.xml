@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 建立xml文件 -->
+
+<!--
+mapper层的路径放到 namespace
+id 是 方法名字,
+resultType 是对象 entity对应的实体类路径
+-->
+<mapper namespace="com.wechatmovie.mapper.AdminMapper">
+    <!--  新增用户  -->
+    <insert id="addAdmin">
+        insert into admin(adminId, name, adminName, password, phone, headpic)
+        value (#{adminId}, #{name}, #{adminName}, #{password}, #{phone}, #{headpic})
+    </insert>
+    <!--  查询用户列表  -->
+    <select id="listAdmins" resultType="com.wechatmovie.entity.Admin">
+        select * from admin order by adminId desc
+    </select>
+    <!--  用户模糊查询  -->
+    <select id="listByCondition" resultType="com.wechatmovie.entity.Admin">
+        select * from admin
+            <where>
+                <if test="name != null and name != ''">
+                    name like concat('%', #{name}, '%')
+                </if>
+            </where>
+        order by adminId desc
+    </select>
+    <!--  通过adminId来查询  -->
+    <select id="getById" resultType="com.wechatmovie.entity.Admin">
+        select * from admin where adminId = #{adminId}
+    </select>
+    <!--  通过id将修改后的数据, 更新到数据库  -->
+    <update id="updateById">
+        update admin set name = #{name}, password = #{password}, phone = #{phone}
+        where adminId = #{adminId}
+    </update>
+    <!--   通过Id删除用户  -->
+    <delete id="deleteById">
+        delete from admin where adminId = #{adminId}
+    </delete>
+    <!--   登录   -->
+    <select id="getByAdminNameAndPassword" resultType="com.wechatmovie.entity.Admin">
+        select * from admin where adminName = #{adminName} and password = #{password}
+    </select>
+
+    <!--  查询管理员账号  -->
+    <select id="getByAdminName" resultType="com.wechatmovie.entity.Admin">
+        select * from admin where adminName = #{adminName}
+    </select>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

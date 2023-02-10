@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 建立xml文件 -->
+
+<!--
+mapper层的路径放到 namespace
+id 是 方法名字,
+resultType 是对象 entity对应的实体类路径
+-->
+<mapper namespace="com.wechatmovie.mapper.CategoryMapper">
+    
+    <resultMap id="categoryMap" type="com.wechatmovie.entity.Category">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <result column="remark" property="remark"></result>
+        <result column="pid" property="pid"></result>
+        <result column="createtime" property="createTime"></result>
+        <collection property="children" column="id" ofType="com.wechatmovie.entity.Category" select="selectByPid"></collection>
+    </resultMap>
+
+    <select id="selectByPid" resultType="com.wechatmovie.entity.Category">
+        select * from category where pid = #{pid}
+    </select>
+    <!--  模糊查询  -->
+    <select id="listByCondition" resultMap="categoryMap">
+        select c1.* from category c1 left join category c2 on c1.id = c2.pid
+        <where>
+            isnull(c1.pid)
+            <if test="name != null and name != ''">
+                and (c1.name like concat('%', #{ name }, '%') or c2.name like concat('%', #{ name }, '%'))
+            </if>
+        </where>
+        group by c1.id
+        order by c1.id desc
+    </select>
+
+    <!--  新增用户  -->
+    <insert id="add">
+        insert into category(id, name, remark, pid)
+        value (#{id}, #{name}, #{remark}, #{pid})
+    </insert>
+    <!--  查询用户列表  -->
+    <select id="list" resultType="com.wechatmovie.entity.Category">
+        select * from category order by id desc
+    </select>
+
+    <!--  通过userId来查询  -->
+    <select id="getById" resultType="com.wechatmovie.entity.Category">
+        select * from category where id = #{id}
+    </select>
+    <!--  通过id将修改后的数据, 更新到数据库  -->
+    <update id="updateById">
+        update category set name = #{name}, remark = #{remark}
+        where id = #{id}
+    </update>
+    <!--   通过Id删除用户  -->
+    <delete id="deleteById">
+        delete from category where id = #{id}
+    </delete>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
