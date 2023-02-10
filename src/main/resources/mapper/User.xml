@@ -18,7 +18,7 @@ resultType 是对象 entity对应的实体类路径
     </insert>
     <!--  查询用户列表  -->
     <select id="listUsers" resultType="com.wechatmovie.entity.User">
-        select * from usertable order by adminId desc
+        select * from usertable order by userId desc
     </select>
     <!--  用户模糊查询  -->
     <select id="listByCondition" resultType="com.wechatmovie.entity.User">

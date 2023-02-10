@@ -1,29 +1,27 @@
 package com.wechatmovie.service;
 
-import com.github.pagehelper.PageInfo;
-import com.wechatmovie.controller.request.BaseRequest;
+import com.wechatmovie.controller.request.FilmPageRequest;
 import com.wechatmovie.entity.Film;
 
 import java.util.List;
 
 public interface IFilmService {
+    // 3. 业务处理层, 操作数据库, 先写个接口
 
     // 查询所有的用户信息
-    List<Film> list();
+    List<Film> listFilms();
 
     // 分页
-    PageInfo<Film> Page(BaseRequest baseRequest);
+    Object filmsPage(FilmPageRequest filmPageRequest);
 
     // 添加新用户
-    void add(Film film);
+    void addFilm(Film film);
 
     // 通过Id查询到详细信息
-    Film getById(Integer id);
+    Film getByFilmId(Integer id);
 
     // 修改信息后更新
-    void updateById(Film film);
+    void updateFilm(Film film);
 
-    // 删除
-    void deleteById(Integer id);
-
+    void deleteFilmById(Integer id);
 }

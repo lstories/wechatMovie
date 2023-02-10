@@ -1,57 +1,60 @@
 package com.wechatmovie.service.impl;
 
+
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.wechatmovie.controller.request.BaseRequest;
+import com.wechatmovie.controller.request.FilmPageRequest;
 import com.wechatmovie.entity.Film;
 import com.wechatmovie.mapper.FilmMapper;
 import com.wechatmovie.service.IFilmService;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 
-@Service
-@Slf4j
+@Service    // 注释,标注为spring的组件,才能被调用
 public class FilmService implements IFilmService {
+    // 4. 实现类, 调用mapper接口
 
-    @Resource
+    @Autowired
     FilmMapper filmMapper;
 
     // 用户列表
     @Override
-    public List<Film> list() {
-        return filmMapper.list();
+    public List<Film> listFilms() {
+        return filmMapper.listFilms();
     }
 
     // 分页
     @Override
-    public PageInfo<Film> Page(BaseRequest baseRequest) {
-        PageHelper.startPage(baseRequest.getPageNum(), baseRequest.getPageSize());
-        List<Film> films = filmMapper.listByCondition(baseRequest);// 按条件查找
+    public Object filmsPage(FilmPageRequest filmPageRequest) {
+        PageHelper.startPage(filmPageRequest.getPageNum(), filmPageRequest.getPageSize());
+        List<Film> films = filmMapper.listByCondition(filmPageRequest);// 按条件查找
         return new PageInfo<>(films);
     }
 
+    // 新增用户
     @Override
-    public void add(Film film) {
-        filmMapper.add(film);
+    public void addFilm(Film film) {
+        filmMapper.addFilm(film);
+    }
+
+    // 查询当前id的用户信息
+    @Override
+    public Film getByFilmId(Integer id) {
+        return filmMapper.getByFilmId(id);
+    }
+
+    // 修改信息后更新
+    @Override
+    public void updateFilm(Film film) {
+        filmMapper.updateFilmById(film);
     }
 
     @Override
-    public Film getById(Integer id) {
-        return filmMapper.getById(id);
-    }
-
-    @Override
-    public void updateById(Film film) {
-        filmMapper.updateById(film);
-    }
-
-    @Override
-    public void deleteById(Integer id) {
-        filmMapper.deleteById(id);
+    public void deleteFilmById(Integer id) {
+        filmMapper.deleteFilmById(id);
     }
 
 

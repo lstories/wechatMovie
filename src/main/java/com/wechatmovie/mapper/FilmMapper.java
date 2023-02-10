@@ -1,29 +1,53 @@
 package com.wechatmovie.mapper;
 
-import com.wechatmovie.controller.request.BaseRequest;
+
+import com.wechatmovie.controller.request.FilmPageRequest;
+import com.wechatmovie.controller.request.UserPageRequest;
 import com.wechatmovie.entity.Film;
+import com.wechatmovie.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-@Mapper
+
+@Mapper     // 使用Mapper注解,将这个注册为spring的一个bean
 public interface FilmMapper {
-    // 查询所有列表
-    List<Film> list();
+
+    // 2. mapper接口,提供数据库调用的方法
+
+    // 查询所有用户列表
+    //  @Select("select * from usertable")
+    List<Film> listFilms();
 
     // 分页
-    List<Film> listByCondition(BaseRequest baseRequest);
+    List<Film> listByCondition(FilmPageRequest filmPageRequest);
 
-    // 新增
-    void add(Film obj);
+    // 新增用户
+    void addFilm(Film film);
 
     // 通过Id查询
-    Film getById(Integer id);
+    Film getByFilmId(Integer id);
 
-    // 通过Id更新
-    void updateById(Film film);
+    // 通过Id删除
+    void updateFilmById(Film film);
 
-    // 通过id删除
-    void deleteById(Integer id);
-
+    void deleteFilmById(Integer id);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

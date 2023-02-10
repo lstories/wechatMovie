@@ -4,9 +4,23 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- 建立xml文件 -->
-<mapper namespace="com.wechatmovie.mapper.FilmMapper">
 
-    <!--  模糊查询  -->
+<!--
+mapper层的路径放到 namespace
+id 是 方法名字,
+resultType 是对象 entity对应的实体类路径
+-->
+<mapper namespace="com.wechatmovie.mapper.FilmMapper">
+    <!--  新增用户  -->
+    <insert id="addFilm">
+        insert into film(id, filmName, category, time, profiles, actor, director, pic, price)
+        value (#{id}, #{filmName}, #{category}, #{time}, #{profiles}, #{actor}, #{director}, #{pic}, #{price})
+    </insert>
+    <!--  查询用户列表  -->
+    <select id="listFilms" resultType="com.wechatmovie.entity.Film">
+        select * from film order by id desc
+    </select>
+    <!--  用户模糊查询  -->
     <select id="listByCondition" resultType="com.wechatmovie.entity.Film">
         select * from film
             <where>
@@ -16,29 +30,18 @@
             </where>
         order by id desc
     </select>
-
-    <!--  新增  -->
-    <insert id="add">
-        insert into film(id, filmName, category, createTime, profiles, actor, director, pic, price)
-        value (#{id}, #{filmName}, #{category}, #{createTime}, #{profiles}, #{actor}, #{director}, #{pic}, #{price})
-    </insert>
-    <!--  查询列表  -->
-    <select id="list" resultType="com.wechatmovie.entity.Film">
-        select * from film order by id desc
-    </select>
-
-    <!--  通过id来查询  -->
-    <select id="getById" resultType="com.wechatmovie.entity.Film">
+    <!--  通过userId来查询  -->
+    <select id="getByFilmId" resultType="com.wechatmovie.entity.Film">
         select * from film where id = #{id}
     </select>
     <!--  通过id将修改后的数据, 更新到数据库  -->
-    <update id="updateById">
-        update film set filmName = #{filmName}, category = #{category}, createTime = #{createTime}, profiles = #{profiles},
+    <update id="updateFilmById">
+        update film set filmName = #{filmName}, category = #{category},time = #{time}, profiles = #{profiles},
                         actor = #{actor}, director = #{director}, pic = #{pic}, price = #{price}
         where id = #{id}
     </update>
     <!--   通过Id删除用户  -->
-    <delete id="deleteById">
+    <delete id="deleteFilmById">
         delete from film where id = #{id}
     </delete>
 

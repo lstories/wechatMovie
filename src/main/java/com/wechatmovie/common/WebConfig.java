@@ -27,7 +27,7 @@ public class WebConfig implements WebMvcConfigurer {
     // excludePathPatterns放开登录接口, 一开始没有token
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(jwtInterceptor).addPathPatterns("/api/**").excludePathPatterns("/api/admin/login");
+        registry.addInterceptor(jwtInterceptor).addPathPatterns("/api/**").excludePathPatterns("/api/admin/login").excludePathPatterns("/api/user/**");
     }
 
 
