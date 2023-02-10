@@ -23,7 +23,7 @@ public class Film {
     private String actor;    // 演员
     private String director;    // 导演
     private String pic;    // 封面
-    private BigDecimal price;    // 电影名
+    private BigDecimal price;    // 价格
 
 
 }
