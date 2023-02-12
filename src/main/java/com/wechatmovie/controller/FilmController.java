@@ -5,9 +5,13 @@ import com.wechatmovie.common.Result;
 import com.wechatmovie.controller.request.FilmPageRequest;
 import com.wechatmovie.entity.Film;
 import com.wechatmovie.service.IFilmService;
+import com.wechatmovie.utils.UploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+
+import java.io.IOException;
 import java.util.List;
 
 
@@ -62,7 +66,11 @@ public class FilmController {
         return Result.success();
     }
 
-
+    // 上传图片
+    @PostMapping("/upload")
+    public Result upload(MultipartFile file) throws IOException {
+        return Result.success(UploadUtil.uploadImage(file));
+    }
 
 
 
