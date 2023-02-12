@@ -1,6 +1,7 @@
 package com.wechatmovie.service.impl;
 
 
+import cn.hutool.core.collection.CollUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.wechatmovie.controller.request.FilmPageRequest;
@@ -20,7 +21,7 @@ public class FilmService implements IFilmService {
     @Autowired
     FilmMapper filmMapper;
 
-    // 用户列表
+    // 列表
     @Override
     public List<Film> listFilms() {
         return filmMapper.listFilms();
@@ -34,13 +35,23 @@ public class FilmService implements IFilmService {
         return new PageInfo<>(films);
     }
 
-    // 新增用户
+    // 新增
     @Override
     public void addFilm(Film film) {
+        film.setCategory(category(film.getCategories()));
         filmMapper.addFilm(film);
     }
 
-    // 查询当前id的用户信息
+    private String category(List<String> categories) {
+        StringBuilder sb = new StringBuilder();
+        if (CollUtil.isNotEmpty(categories)) {
+            categories.forEach(v -> sb.append(v).append(">"));
+            return sb.substring(0, sb.lastIndexOf(">"));
+        }
+        return sb.toString();
+    }
+
+    // 查询当前id的信息
     @Override
     public Film getByFilmId(Integer id) {
         return filmMapper.getByFilmId(id);
@@ -49,9 +60,11 @@ public class FilmService implements IFilmService {
     // 修改信息后更新
     @Override
     public void updateFilm(Film film) {
+        film.setCategory(category(film.getCategories()));
         filmMapper.updateFilmById(film);
     }
 
+    // 删除
     @Override
     public void deleteFilmById(Integer id) {
         filmMapper.deleteFilmById(id);

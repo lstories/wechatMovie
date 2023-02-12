@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -25,5 +26,6 @@ public class Film {
     private String pic;    // 封面
     private BigDecimal price;    // 价格
 
+    private List<String> categories;
 
 }

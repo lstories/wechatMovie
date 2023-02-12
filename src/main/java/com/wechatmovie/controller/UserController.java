@@ -15,18 +15,10 @@ import java.util.List;
 @RequestMapping("/user")
 
 public class UserController {
-    // 5. controller层实现将数据传递给前端浏览器
-    // 对外暴露api
 
     @Autowired  // 注入
     IUserService userService;
 
-    /* 第一种写法
-       @GetMapping("/list") // 查询
-       public List<User> listUsers(){
-           return userService.listUsers();
-       }
-      */
     // 用户列表
     @GetMapping("/list")
     public Result listUsers() {

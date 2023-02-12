@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wechatmovie.mapper.OrderMapper">
+    <!--  新增  -->
+    <insert id="add">
+        insert into order(id, userName, filmName, roomId, price, brand, createtime, begintime, endtime, captcha)
+        value (#{id}, #{userName}, #{filmName}, #{roomId}, #{price}, #{brand}, #{createtime}, #{begintime}, #{endtime}, #{captcha})
+    </insert>
+    <!--  查询列表  -->
+    <select id="list" resultType="com.wechatmovie.entity.Order">
+        select * from order order by id desc
+    </select>
+    <!--  模糊查询  -->
+    <select id="listByCondition" resultType="com.wechatmovie.entity.Order">
+        select * from order
+            <where>
+                <if test="userName != null and userName != ''">
+                    userName like concat('%', #{ userName }, '%')
+                </if>
+            </where>
+        order by id desc
+    </select>
+    <!--  通过Id来查询  -->
+    <select id="getById" resultType="com.wechatmovie.entity.Order">
+        select * from order where id = #{id}
+    </select>
+    <!--  通过id将修改后的数据, 更新到数据库  -->
+    <update id="updateById">
+        update order set userName = #{userName}, filmName = #{filmName},roomId = #{roomId}, price = #{price}, brand = #{brand}, createtime = #{createtime}, begintime = #{begintime}, endtime = #{endtime}, captcha = #{captcha}
+        where id = #{id}
+    </update>
+    <!--   通过Id删除  -->
+    <delete id="deleteById">
+        delete from order where id = #{id}
+    </delete>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

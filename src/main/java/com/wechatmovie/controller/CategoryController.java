@@ -1,6 +1,7 @@
 package com.wechatmovie.controller;
 
 
+import cn.hutool.core.collection.CollUtil;
 import com.wechatmovie.common.Result;
 import com.wechatmovie.controller.request.CategoryPageRequest;
 import com.wechatmovie.entity.Category;
@@ -8,14 +9,14 @@ import com.wechatmovie.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
 @RequestMapping("/category")
 public class CategoryController {
-    // 5. controller层实现将数据传递给前端浏览器
-    // 对外暴露api
 
     @Autowired  // 注入
     ICategoryService categoryService;
@@ -61,8 +62,35 @@ public class CategoryController {
         return Result.success();
     }
 
+    // 获取分类列表
+    @GetMapping("tree")
+    public Result tree() {
+        List<Category> list = categoryService.list();
+        // 对list操作
 
+        return Result.success(createTree(null, list));
+    }
 
+    private List<Category> createTree(Integer pid, List<Category> categories) {
+        List<Category> treeList = new ArrayList<>();
+        for (Category category : categories) {
+            if (pid == null) {
+                if (category.getPid() == null){
+                    treeList.add(category);
+                    category.setChildren(createTree(category.getId(), categories));
+                }
+            }else{
+                if (pid.equals(category.getPid())){
+                    treeList.add(category);
+                    category.setChildren(createTree(category.getId(), categories));
+                }
+            }
+            if (CollUtil.isEmpty(category.getChildren())) {
+                category.setChildren(null);
+            }
+        }
+        return treeList;
+    }
 
 
 

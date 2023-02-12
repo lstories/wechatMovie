@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 建立xml文件 -->
+
+<!--
+mapper层的路径放到 namespace
+id 是 方法名字,
+resultType 是对象 entity对应的实体类路径
+-->
+<mapper namespace="com.wechatmovie.mapper.RoomMapper">
+
+    <!--  模糊查询  -->
+    <select id="listByCondition" resultType="com.wechatmovie.entity.Room">
+        select * from order
+        <where>
+            <if test="userName != null and userName != ''">
+                userName like concat('%', #{ userName }, '%')
+            </if>
+        </where>
+        order by id desc
+    </select>
+
+    <!--  新增  -->
+    <insert id="add">
+        insert into category(id, name, remark, pid)
+        value (#{id}, #{name}, #{remark}, #{pid})
+    </insert>
+    <!--  查询列表  -->
+    <select id="list" resultType="com.wechatmovie.entity.Room">
+        select * from category order by id desc
+    </select>
+
+    <!--  通过id来查询  -->
+    <select id="getById" resultType="com.wechatmovie.entity.Room">
+        select * from category where id = #{id}
+    </select>
+    <!--  通过id将修改后的数据, 更新到数据库  -->
+    <update id="updateById">
+        update category set name = #{name}, remark = #{remark}
+        where id = #{id}
+    </update>
+    <!--   通过Id删除用户  -->
+    <delete id="deleteById">
+        delete from category where id = #{id}
+    </delete>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
