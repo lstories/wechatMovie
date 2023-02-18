@@ -28,7 +28,7 @@ public class AdminController {
         return Result.success(loginDTO);
     }
 
-    // 用户列表
+    // 列表
     @GetMapping("/list")
     public Result listadmins() {
         List<Admin> admins = adminService.listAdmins();
@@ -68,15 +68,6 @@ public class AdminController {
         adminService.deleteById(adminId);
         return Result.success();
     }
-
-
-
-
-
-
-
-
-
 
 
 
