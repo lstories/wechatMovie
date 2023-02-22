@@ -70,5 +70,18 @@ public class FilmService implements IFilmService {
         filmMapper.deleteFilmById(id);
     }
 
+    // 查询评分最高的前10个
+    @Override
+    public List<Film> heightTen() {
+        return filmMapper.heightTen();
+    }
+
+    // 按照分类查询
+    @Override
+    public Object filmsCategory(FilmPageRequest filmPageRequest) {
+        PageHelper.startPage(filmPageRequest.getPageNum(), filmPageRequest.getPageSize());
+        List<Film> films = filmMapper.filmsCategory(filmPageRequest);// 按条件查找
+        return new PageInfo<>(films);
+    }
 
 }

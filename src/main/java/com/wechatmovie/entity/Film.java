@@ -25,6 +25,8 @@ public class Film {
     private String director;    // 导演
     private String pic;    // 封面
     private BigDecimal price;    // 价格
+    private BigDecimal score;    // 评分
+    private String video;       // 视频
 
     private List<String> categories;
 

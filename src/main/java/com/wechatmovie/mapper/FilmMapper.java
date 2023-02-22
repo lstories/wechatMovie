@@ -13,6 +13,9 @@ import java.util.List;
 @Mapper     // 使用Mapper注解,将这个注册为spring的一个bean
 public interface FilmMapper {
 
+    // 查询评分最高的前10个
+    List<Film> heightTen();
+
     // 2. mapper接口,提供数据库调用的方法
 
     // 查询所有用户列表
@@ -32,6 +35,8 @@ public interface FilmMapper {
     void updateFilmById(Film film);
 
     void deleteFilmById(Integer id);
+
+    List<Film> filmsCategory(FilmPageRequest filmPageRequest);
 }
 
 

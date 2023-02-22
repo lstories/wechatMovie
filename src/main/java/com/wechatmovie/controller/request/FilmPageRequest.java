@@ -8,5 +8,7 @@ public class FilmPageRequest extends BaseRequest {
 
 
     private String filmName;    // 电影名
+    private String category;    // 分类
+
 
 }

@@ -25,5 +25,9 @@ public interface IFilmService {
 
     void deleteFilmById(Integer id);
 
+    // 查询评分最高的前10个
+    List<Film> heightTen();
+
+    Object filmsCategory(FilmPageRequest filmPageRequest);
 
 }

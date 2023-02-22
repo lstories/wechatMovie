@@ -25,7 +25,7 @@ public class FilmController {
     @Autowired  // 注入
     IFilmService filmService;
 
-    // 用户列表
+    // 电影列表
     @GetMapping("/list")
     public Result listFilms() {
         List<Film> films = filmService.listFilms();
@@ -66,13 +66,25 @@ public class FilmController {
         return Result.success();
     }
 
+    // 查询评分最高的前5个
+    @GetMapping("height")
+    public Result heightTen() {
+        List<Film> films = filmService.heightTen();
+        return Result.success(films);
+    }
+
     // 上传图片
     @PostMapping("/upload")
     public Result upload(MultipartFile file) throws IOException {
         return Result.success(UploadUtil.uploadImage(file));
     }
 
+    // 通过查 分类 返回到页面对应的位置的数据
+    @GetMapping("/category")
+    public Result getByFilmCategory(FilmPageRequest filmPageRequest) {
+        return Result.success(filmService.filmsCategory(filmPageRequest));
 
+    }
 
 
 

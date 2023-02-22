@@ -37,17 +37,17 @@ resultType 是对象 entity对应的实体类路径
         order by c1.id desc
     </select>
 
-    <!--  新增用户  -->
+    <!--  新增  -->
     <insert id="add">
         insert into category(id, name, remark, pid)
         value (#{id}, #{name}, #{remark}, #{pid})
     </insert>
-    <!--  查询用户列表  -->
+    <!--  查询列表  -->
     <select id="list" resultType="com.wechatmovie.entity.Category">
-        select * from category order by id desc
+        select * from category
     </select>
 
-    <!--  通过userId来查询  -->
+    <!--  通过id来查询  -->
     <select id="getById" resultType="com.wechatmovie.entity.Category">
         select * from category where id = #{id}
     </select>
@@ -56,7 +56,7 @@ resultType 是对象 entity对应的实体类路径
         update category set name = #{name}, remark = #{remark}
         where id = #{id}
     </update>
-    <!--   通过Id删除用户  -->
+    <!--   通过Id删除  -->
     <delete id="deleteById">
         delete from category where id = #{id}
     </delete>
