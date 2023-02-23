@@ -37,6 +37,10 @@ public interface FilmMapper {
     void deleteFilmById(Integer id);
 
     List<Film> filmsCategory(FilmPageRequest filmPageRequest);
+
+    List<Film> byCategory(FilmPageRequest filmPageRequest);
+
+
 }
 
 

@@ -84,4 +84,12 @@ public class FilmService implements IFilmService {
         return new PageInfo<>(films);
     }
 
+    // 按照分类查询
+    @Override
+    public Object byCategory(FilmPageRequest filmPageRequest) {
+        PageHelper.startPage(filmPageRequest.getPageNum(), filmPageRequest.getPageSize());
+        List<Film> films = filmMapper.filmsCategory(filmPageRequest);// 按条件查找
+        return new PageInfo<>(films);
+    }
+
 }

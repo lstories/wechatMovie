@@ -87,7 +87,12 @@ public class FilmController {
     }
 
 
+    // 通过查 分类 返回到页面对应的位置的数据
+    @GetMapping("/byCategory")
+    public Result byCategory(FilmPageRequest filmPageRequest) {
+        return Result.success(filmService.byCategory(filmPageRequest));
 
+    }
 
 
 

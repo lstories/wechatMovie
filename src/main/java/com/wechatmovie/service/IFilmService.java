@@ -29,5 +29,9 @@ public interface IFilmService {
     List<Film> heightTen();
 
     Object filmsCategory(FilmPageRequest filmPageRequest);
+    // 通过名字查找
+    Object byCategory(FilmPageRequest filmPageRequest);
+
+
 
 }

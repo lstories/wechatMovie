@@ -53,11 +53,19 @@ resultType 是对象 entity对应的实体类路径
     <select id="filmsCategory" resultType="com.wechatmovie.entity.Film">
         select * from film
         <where>
+            <if test="filmName != null and filmName != ''">
+                filmName like concat('%', #{filmName}, '%')
+            </if>
             <if test="category != null and category != ''">
                 category like concat('%', #{category}, '%')
             </if>
         </where>
-        order by id desc
+        order by price desc
+    </select>
+    <!--  通过分类查找  -->
+    <select id="byCategory" resultType="com.wechatmovie.entity.Film">
+        select * from film where category = #{category}
+        order by price desc
     </select>
 </mapper>
 

@@ -20,7 +20,7 @@ resultType 是对象 entity对应的实体类路径
     <select id="listFilms" resultType="com.wechatmovie.entity.Film">
         select * from film order by id desc
     </select>
-    <!--  用户模糊查询  -->
+    <!--  模糊查询  -->
     <select id="listByCondition" resultType="com.wechatmovie.entity.Film">
         select * from film
             <where>
@@ -34,6 +34,7 @@ resultType 是对象 entity对应的实体类路径
     <select id="getByFilmId" resultType="com.wechatmovie.entity.Film">
         select * from film where id = #{id}
     </select>
+
     <!--  通过id将修改后的数据, 更新到数据库  -->
     <update id="updateFilmById">
         update film set filmName = #{filmName}, category = #{category},time = #{time}, profiles = #{profiles},
@@ -44,8 +45,33 @@ resultType 是对象 entity对应的实体类路径
     <delete id="deleteFilmById">
         delete from film where id = #{id}
     </delete>
-
-
+    <!--  查询评分最高的前10个  -->
+    <select id="heightTen" resultType="com.wechatmovie.entity.Film">
+        SELECT * FROM `film` order by score desc limit 0,10
+    </select>
+   <!--  通过分类查询  -->
+    <select id="filmsCategory" resultType="com.wechatmovie.entity.Film">
+        select * from film
+        <where>
+            <if test="filmName != null and filmName != ''">
+                filmName like concat('%', #{filmName}, '%')
+            </if>
+            <if test="category != null and category != ''">
+                category like concat('%', #{category}, '%')
+            </if>
+        </where>
+        order by price desc
+    </select>
+    <!--  通过分类查找  -->
+    <select id="byCategory" resultType="com.wechatmovie.entity.Film">
+        select * from film
+        <where>
+            <if test="category != null and category != ''">
+                category like concat('%', #{category}, '%')
+            </if>
+        </where>
+        order by price desc
+    </select>
 </mapper>
 
 
