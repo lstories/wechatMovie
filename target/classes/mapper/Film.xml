@@ -64,12 +64,7 @@ resultType 是对象 entity对应的实体类路径
     </select>
     <!--  通过分类查找  -->
     <select id="byCategory" resultType="com.wechatmovie.entity.Film">
-        select * from film
-        <where>
-            <if test="category != null and category != ''">
-                category like concat('%', #{category}, '%')
-            </if>
-        </where>
+        select * from film where category = #{category}
         order by price desc
     </select>
 </mapper>

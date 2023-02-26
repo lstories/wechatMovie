@@ -20,7 +20,7 @@ public class OrderService implements IOrderService {
     @Autowired
     OrderMapper orderMapper;
 
-    // 用户列表
+    // 订单列表
     @Override
     public List<Order> list() {
         return orderMapper.list();
@@ -34,13 +34,13 @@ public class OrderService implements IOrderService {
         return new PageInfo<>(orders);
     }
 
-    // 新增用户
+    // 新增
     @Override
     public void add(Order order) {
         orderMapper.add(order);
     }
 
-    // 查询当前id的用户信息
+    // 查询当前id的订单信息
     @Override
     public Order getById(Integer id) {
         return orderMapper.getById(id);
@@ -52,6 +52,7 @@ public class OrderService implements IOrderService {
         orderMapper.updateById(order);
     }
 
+    // 通过id删除
     @Override
     public void deleteById(Integer id) {
         orderMapper.deleteById(id);

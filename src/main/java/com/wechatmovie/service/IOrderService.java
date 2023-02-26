@@ -10,7 +10,7 @@ import java.util.List;
 public interface IOrderService {
     // 3. 业务处理层, 操作数据库, 先写个接口
 
-    // 查询所有的用户信息
+    // 查询所有的订单信息
     List<Order> list();
 
     // 分页
@@ -25,5 +25,6 @@ public interface IOrderService {
     // 修改信息后更新
     void update(Order order);
 
+    // 通过id删除
     void deleteById(Integer id);
 }

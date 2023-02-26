@@ -6,8 +6,8 @@
 <mapper namespace="com.wechatmovie.mapper.OrderMapper">
     <!--  新增  -->
     <insert id="add">
-        insert into order(id, userName, filmName, roomId, price, brand, createtime, begintime, endtime, captcha)
-        value (#{id}, #{userName}, #{filmName}, #{roomId}, #{price}, #{brand}, #{createtime}, #{begintime}, #{endtime}, #{captcha})
+        insert into order(id, userid, filmid, roomid, price, brand, createtime, begintime, endtime, captcha)
+        value (#{id}, #{userid}, #{filmid}, #{roomid}, #{price}, #{brand}, #{createtime}, #{begintime}, #{endtime}, #{captcha})
     </insert>
     <!--  查询列表  -->
     <select id="list" resultType="com.wechatmovie.entity.Order">

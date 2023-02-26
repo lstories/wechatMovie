@@ -31,28 +31,28 @@ public class OrderController {
         return Result.success(orderService.Page(orderRequest));
     }
 
-    // 新增用户
-    @PostMapping("/adduser")
-    public Result addUser(@RequestBody Order order) {
+    // 新增
+    @PostMapping("/add")
+    public Result add(@RequestBody Order order) {
         orderService.add(order);
         return Result.success();
     }
 
-    // 通过查userId 返回到页面对应的位置的数据
+    // 通过查Id 返回到页面对应的位置的数据
     @GetMapping("/{id}")
     public Result getById(@PathVariable Integer id) {
         Order order = orderService.getById(id);
         return Result.success(order);
     }
 
-    // 更新修改后的用户信息
+    // 更新修改后的订单信息
     @PutMapping("/update")
     public Result update(@RequestBody Order order){
         orderService.update(order);
         return Result.success();
     }
 
-    // 根据id删除用户
+    // 根据id删除
     @DeleteMapping("/delete/{id}")
     public Result delete(@PathVariable Integer id) {
         orderService.deleteById(id);

@@ -13,16 +13,16 @@ import java.util.Date;
 @NoArgsConstructor
 public class Order {
     private Integer id;     // id
-    private String userName;     // 用户名
-    private String filmName;     // 电影名
-    private Integer roomId;     // id
+    private Integer userid;     // 用户名
+    private Integer filmid;     // 电影名
+    private Integer roomid;     // id
     private BigDecimal price;    // 价格
     private String brand;        // 类型(平团/预约)
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
     private Date createtime;    // 备注
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
     private Date begintime;    // 创建时间
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
     private Date endtime;    // 创建时间
     private String captcha;     // 验证码
 

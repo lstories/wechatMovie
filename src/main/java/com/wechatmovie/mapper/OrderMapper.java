@@ -13,21 +13,22 @@ public interface OrderMapper {
 
     // 2. mapper接口,提供数据库调用的方法
 
-    // 查询所有用户列表
+    // 查询所有订单列表
     List<Order> list();
 
     // 分页
     List<Order> listByCondition(OrderRequest orderRequest);
 
-    // 新增用户
+    // 新增
     void add(Order order);
 
     // 通过Id查询
     Order getById(Integer id);
 
-    // 通过Id删除
+    // 通过id更新
     void updateById(Order order);
 
+    // 通过Id删除
     void deleteById(Integer id);
 }
 
